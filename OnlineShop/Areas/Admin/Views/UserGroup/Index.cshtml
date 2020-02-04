@@ -1,0 +1,84 @@
+﻿@using Model.EF;
+@{
+    ViewBag.Title = "Nhóm quyền";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+    var listCredential = (IDictionary<string,List<Credential>>)ViewBag.ListCredential;
+    var listMod = (List<string>)ViewBag.Mod;
+    var listAdmin = (List<string>)ViewBag.Admin;
+    var listMember = (List<string>)ViewBag.Member;
+}
+
+
+@section header
+{
+    Danh sách nhóm quyền
+}
+
+
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Danh sách nhóm quyền 
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+             
+                        @*<input type="text" value="@ViewBag.searchString" name="searchString" class="form-control" placeholder="Nhập từ khóa cần tìm...." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+
+                        </div>*@
+                        @*<a href="#" class="btn btn-success" style="margin-left:5px">Tạo mới</a>*@
+            
+
+
+                <thead>
+                    <tr>
+                        <th>Nhóm</th>
+                        <th>Tên quyền</th>                     
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in listCredential)
+                    {
+
+                    <tr>
+                        <td>@item.Key</td>
+                        @{ if (item.Key == "MOD")
+                            {
+                                <td>@string.Join(",", listMod)</td>
+                            }
+                            else if (item.Key == "ADMIN")
+                            {
+                                <td>@string.Join(",", listAdmin)</td>
+                            }
+                            else
+                            {
+                                <td>@string.Join(",", listMember)</td>
+                            }
+                            
+                        }
+
+                        <td></td>
+                    </tr>
+                    }
+
+
+                </tbody>
+            </table>
+
+        </div>
+        @*<div class="dataTables_paginate paging_simple_numbers">
+            <ui class="">
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page,@searchString= ViewBag.searchString }))
+            </ui>
+        </div>*@
+    </div>
+</div>
