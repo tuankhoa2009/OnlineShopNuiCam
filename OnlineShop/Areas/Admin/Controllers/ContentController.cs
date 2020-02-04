@@ -14,8 +14,8 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
+        } 
+        
         public ActionResult Create()
         {
             SetViewBag();
